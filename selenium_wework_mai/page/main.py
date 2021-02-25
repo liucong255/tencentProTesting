@@ -2,7 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-from selenium_wework_main.page.add_member import AddMember
+from selenium_wework_mai.page.add_member import AddMember
 from selenium.webdriver.chrome.options import Options
 
 class Main:
@@ -14,5 +14,5 @@ class Main:
 
     def goto_add_member(self):
         self._driver.get('https://work.weixin.qq.com/wework_admin/frame')
-        self._driver.find_element(By.CSS_SELECTOR, "menu_contacts").click()
+        self._driver.find_element(By.CSS_SELECTOR, "#menu_contacts").click()
         return AddMember(self._driver)
