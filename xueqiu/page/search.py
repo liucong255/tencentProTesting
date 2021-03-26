@@ -10,3 +10,6 @@ class Search(BasePage):
         self.find(By.XPATH, "//*[@text='阿里巴巴']").click()
         self.find(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/stock_layout']//*[@text='阿里巴巴']/../..//*[@text='加自选']").click()
 
+    def is_choose(self):
+        eles = self.finds(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/stock_layout']//*[@text='阿里巴巴']/../..//*[@text='已添加']")
+        return len(eles) > 0

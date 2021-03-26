@@ -17,6 +17,14 @@ class BasePage:
     def __init__(self, driver: WebDriver = None):
         self._driver = driver
 
+    def finds(self, locator, value: str = None):
+        element: list
+        if isinstance(locator, tuple):
+            elements = self._driver.find_elements(*locator)
+        else:
+            elements = self._driver.find_elements(locator, value)
+        return elements
+
     def find(self, locator, value: str = None):
         element: WebElement
         try:
