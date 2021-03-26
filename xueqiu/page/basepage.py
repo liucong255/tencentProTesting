@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from appium import webdriver
 from appium.webdriver import WebElement
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
+from xueqiu.page.handle_black import handle_black
+
 
 class BasePage:
-    _max_num = 3
-    _error_num = 0
-    _black_list = [
-        (By.XPATH, "//*[@text='确认']"),
-        (By.XPATH, "//*[@text='确定']"),
-        (By.XPATH, "//*[@text='下次再说']")
-    ]
+    logging.basicConfig(level=logging.INFO)
 
     def __init__(self, driver: WebDriver = None):
         self._driver = driver
@@ -25,33 +23,15 @@ class BasePage:
             elements = self._driver.find_elements(locator, value)
         return elements
 
+    @handle_black
     def find(self, locator, value: str = None):
+        logging.info(locator)
+        logging.info(value)
         element: WebElement
-        try:
-            if isinstance(locator, tuple):
-                element = self._driver.find_element(*locator)
-            else:
-                element = self._driver.find_element(locator, value)
-            self._error_num = 0
-            self._driver.implicitly_wait(10)
-            return element
-        except Exception as e:
-            self._driver.implicitly_wait(1)
-            if self._error_num > self._max_num:
-                raise e
-            self._error_num +=1
-            for ele in self._black_list:
-                elelist = self._driver.find_elements(*ele)
-                if len(elelist)>0:
-                    elelist[0].click()
-                    return self.find(locator, value)
-            raise e
-
-
-
-
-
-
-
-
-
+        #element = self._driver.find_element(*locator) if isinstance(locator, tuple) else self._driver.find_element(locator, value)
+        if isinstance(locator, tuple):
+            element = self._driver.find_element(*locator)
+        else:
+            element = self._driver.find_element(locator, value)
+        self._driver.implicitly_wait(10)
+        return element

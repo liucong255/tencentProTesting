@@ -10,5 +10,5 @@ class TestSearch:
         pass
 
     def test_search(self):
-        self.search.search()
-        assert self.search.is_choose()
+        self.search.search("阿里巴巴-SW")
+        assert self.search.is_choose("阿里巴巴-SW")
