@@ -21,7 +21,7 @@ class App(BasePage):
         else:
             self._driver.start_activity('com.xueqiu.android', '.common.MainActivity')
 
-        self._driver.implicitly_wait(10)
+        self._driver.implicitly_wait(4)
 
         return self
 
