@@ -8,6 +8,6 @@ from xueqiu.page.market import Market
 
 class Main(BasePage):
     def goto_market(self):
-        #self.find(By.XPATH, "//*[@text='行情']").click()
+        # ## self.find(By.XPATH, "//*[@text='行情']").click()
         self.steps("../page/main.yaml")
         return Market(self._driver)
